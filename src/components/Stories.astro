@@ -9,25 +9,61 @@ const entries = await getEntries('stories');
     <title>Seed Company Stories</title>
   </head>
   <body>
-    <div class="md:flex gap-20">
-        {entries.items
-            .filter((entry) => entry.fields.category == "Featured")
-            .map((entry) => (
-              <div class="w-full mb-10">
-                {entry.fields.featuredImage && (
-                  <img
-                    class="rounded-md max-h-[350px] object-cover w-full"
-                    src={entry.fields.featuredImage.fields.file.url}
-                    alt={
-                      entry.fields.featuredImage.fields.title || entry.fields.title
-                    }
-                    style="max-width: 100%; height: auto;"
-                  />
-                )}
-                <h2 class="text-2xl my-5">{entry.fields.title}</h2>
-                <p>{entry.fields.excerpt.content[0].content[0].value}</p>
-              </div>
-            ))}
-      </div>      
+    <!-- <div class="md:flex gap-20">
+      {entries.items
+        .filter((entry) => entry.fields.category == "Featured")
+        .map((entry) => (
+          <div class="w-full mb-10" key={entry.sys.id}>
+            {entry.fields.featuredImage && (
+              <img
+                class="rounded-md h-full max-h-[240px] object-cover w-full"
+                src={entry.fields.featuredImage.fields.file.url}
+                alt={
+                  entry.fields.featuredImage.fields.title || entry.fields.title
+                }
+                style="max-width: 100%;"
+              />
+            )}
+            <h2 class="text-2xl my-5">{entry.fields.title}</h2>
+            <p>
+              {entry.fields.excerpt?.content?.[0]?.content?.[0]?.value || "No excerpt available."}
+              {console.log(typeof entry.fields.category, entry.fields.category)}
+            </p>
+          </div>
+        ))}
+    </div>       -->
+    <div class="stories-container">
+      {entries.items
+        .filter((entry) => entry.fields.category == "Featured")
+        .map((entry) => (
+          <div class="stories-item" key={entry.sys.id}>
+            {entry.fields.featuredImage && (
+              <img
+                class="rounded-md max-h-[266px] w-full object-cover"
+                src={entry.fields.featuredImage.fields.file.url}
+                alt={
+                  entry.fields.featuredImage.fields.title || entry.fields.title
+                }
+              />
+            )}
+            <h2 class="text-2xl my-5">{entry.fields.title}</h2>
+            <p>
+              {entry.fields.excerpt?.content?.[0]?.content?.[0]?.value || "No excerpt available."}
+            </p>
+          </div>
+        ))}
+    </div>
   </body>
 </html>
+<style>
+  .stories-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    justify-items: center;
+    grid-gap: 30px;
+  }
+  .stories-item {
+    width: 100%;
+    overflow: hidden;
+  }
+</style>

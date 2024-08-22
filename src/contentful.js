@@ -8,7 +8,7 @@ console.log('Access Token:', import.meta.env.CONTENTFUL_ACCESS_TOKEN);
 const client = contentful.createClient({
   space: import.meta.env.CONTENTFUL_SPACE_ID,
   environment: 'master', // Adjust if using a different environment
-  accessToken: import.meta.env.CONTENTFUL_ACCESS_TOKEN
+  accessToken: import.meta.env.CONTENTFUL_ACCESS_TOKEN,
 });
 
 // Function to get entries by content type
